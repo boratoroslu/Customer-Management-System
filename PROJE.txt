@@ -1,0 +1,18 @@
+CUSTOMER
+-id -name -type -phone -mail -address
+
+PRODUCT
+-id -name -code -price -stock
+
+CART
+-id -customer_id -product_id -price -date -note
+
+BASKET
+-id -product_id
+
+USER
+-id -name -mail -password
+
+View
+Business
+DAO

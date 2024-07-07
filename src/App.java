@@ -1,6 +1,7 @@
 import business.UserController;
 import core.Database;
 import core.Helper;
+import entity.Customer;
 import entity.User;
 import view.DashboardUI;
 import view.LoginUI;

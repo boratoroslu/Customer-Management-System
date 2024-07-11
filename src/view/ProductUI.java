@@ -29,7 +29,7 @@ private ProductController productController;
  this.productController = new ProductController();
     this.add(container);
     this.setTitle("Ürün Ekle/Düzenle");
-    this.setSize(300,500);
+    this.setSize(300,400);
     int x = (Toolkit.getDefaultToolkit().getScreenSize().width - this.getSize().width) / 2;
     int y = (Toolkit.getDefaultToolkit().getScreenSize().height - this.getSize().height) / 2;
     this.setLocation(x, y);
@@ -41,8 +41,8 @@ private ProductController productController;
         this.lbl_title.setText("Ürün Düzenle");
         this.fld_product_name.setText(this.product.getName());
         this.fld_product_code.setText(this.product.getCode());
-        this.fld_product_price.setText(String.valueOf(this.fld_product_price));
-        this.fld_product_stock.setText(String.valueOf(this.fld_product_stock));
+        this.fld_product_price.setText(String.valueOf(this.product.getPrice()));
+        this.fld_product_stock.setText(String.valueOf(this.product.getStock()));
     }
 
         btn_product.addActionListener(e -> {
@@ -55,12 +55,12 @@ private ProductController productController;
             if (Helper.isFieldListEmpty(checkList)){
                 Helper.showMsg("fill");
             }else {
+                boolean result;
                 this.product.setName(this.fld_product_name.getText());
                 this.product.setCode(this.fld_product_code.getText());
                 this.product.setPrice(Integer.parseInt(this.fld_product_price.getText()));
                 this.product.setStock(Integer.parseInt(this.fld_product_stock.getText()));
 
-                boolean result;
                 if (this.product.getId()==0){
                     result = this.productController.save(this.product);
                 } else {
@@ -68,6 +68,7 @@ private ProductController productController;
                 }
                 if (result){
                     Helper.showMsg("done");
+                    dispose();
                 }else {
                     Helper.showMsg("error");
                 }

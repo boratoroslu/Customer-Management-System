@@ -43,13 +43,13 @@ public class ProductDao {
         }
         return true;
 
-    }
+    } //name code price stock
     public boolean update(Product product){
         String query ="UPDATE product SET " +
                 " name=?, " +
                 " code=?, " +
                 " price=? ," +
-                " stock=?, " +
+                " stock=? " +
                 " WHERE id=? ";
         try {
             PreparedStatement pr = this.connection.prepareStatement(query);
@@ -79,6 +79,31 @@ public class ProductDao {
         }
         return product;
     }
+    public boolean delete(int id) {
+        String query = "DELETE FROM product WHERE id = ?";
+        try {
+            PreparedStatement pr = this.connection.prepareStatement(query);
+            pr.setInt(1, id);
+            return pr.executeUpdate() != -1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return  true;
+    }
+
+    public ArrayList<Product> query(String query){
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            ResultSet rs = this.connection.createStatement().executeQuery(query);
+            while (rs.next()){
+                products.add(this.match(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return products;
+    }
+
     public Product match(ResultSet rs) throws SQLException{
         Product product = new Product();
         product.setId(rs.getInt("id"));

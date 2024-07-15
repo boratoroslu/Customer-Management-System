@@ -110,6 +110,9 @@ public class DashboardUI extends JFrame {
         loadBasketTable();
         loadBasketButtonEvent();
         loadBasketCustomerCombo();
+        btn_basket_new.addActionListener(e -> {
+
+        });
     }
     private void loadBasketCustomerCombo(){
         ArrayList<Customer> customers = this.customerController.findAll();
